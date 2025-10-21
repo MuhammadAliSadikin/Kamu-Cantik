@@ -17,14 +17,16 @@ const lyrics = [
 
 let currentLine = 0;
 let typing = false;
-let isPlaying = false;
+let interval = null; 
+let paused = false;
 
-// Efek ketik
 function typeWriter(text, callback) {
   typing = true;
   lyricsContainer.innerHTML = '';
   let i = 0;
-  const interval = setInterval(() => {
+  interval = setInterval(() => {
+    if (paused) return; 
+
     lyricsContainer.textContent += text.charAt(i);
     i++;
     if (i >= text.length) {
@@ -35,21 +37,9 @@ function typeWriter(text, callback) {
   }, 70);
 }
 
-// Tombol Play
-playBtn.addEventListener("click", () => {
-  if (!isPlaying) {
-    audio.play();
-    playBtn.innerText = "⏸ Pause Lagu";
-    isPlaying = true;
-  } else {
-    audio.pause();
-    playBtn.innerText = "▶ Play Lagu";
-    isPlaying = false;
-  }
-});
-
-// Sinkronisasi waktu lirik
 audio.addEventListener('timeupdate', () => {
+  if (paused) return;
+
   if (currentLine < lyrics.length && audio.currentTime >= lyrics[currentLine].time && !typing) {
     const line = lyrics[currentLine];
     typeWriter(line.text);
@@ -60,24 +50,30 @@ audio.addEventListener('timeupdate', () => {
 audio.addEventListener('ended', () => {
   currentLine = 0;
   lyricsContainer.innerHTML = '';
-  playBtn.innerText = "▶ Play Lagu";
-  isPlaying = false;
+  playBtn.textContent = '▶️ Play Lagu';
 });
 
-const flowerTypes = ['🌸', '💐',];
+playBtn.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    paused = false;
+    playBtn.textContent = '⏸️ Pause Lagu';
+  } else {
+    audio.pause();
+    paused = true;
+    playBtn.textContent = '▶️ Play Lagu';
+  }
+});
 
 function createFlower() {
   const flower = document.createElement('div');
   flower.classList.add('flower');
-  flower.textContent = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
-  
+  const flowers = ['🌸', '💐']; // dua jenis bunga
+  flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
   flower.style.left = Math.random() * 100 + 'vw';
-  flower.style.fontSize = Math.random() * 30 + 15 + 'px';
-  flower.style.animationDuration = Math.random() * 4 + 4 + 's';
-  flower.style.opacity = Math.random() * 0.8 + 0.4;
-
+  flower.style.fontSize = Math.random() * 20 + 15 + 'px';
+  flower.style.animationDuration = Math.random() * 3 + 3 + 's';
   document.body.appendChild(flower);
-  setTimeout(() => flower.remove(), 9000);
+  setTimeout(() => flower.remove(), 6000);
 }
-
-setInterval(createFlower, 350);
+setInterval(createFlower, 300);
