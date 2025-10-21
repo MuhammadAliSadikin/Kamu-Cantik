@@ -29,22 +29,6 @@ body::before {
   background-size: 400% 400%;
   z-index: -3;
 }
-
-/* 🌌 Lapisan bintang */
-body::after {
-  content: "";
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  top: -50%;
-  left: -50%;
-  background-image: radial-gradient(white 1px, transparent 1px);
-  background-size: 3px 3px;
-  opacity: 0.4;
-  animation: starsMove 120s linear infinite;
-  z-index: -2;
-}
-
 @keyframes starsMove {
   from { transform: translate(0, 0); }
   to { transform: translate(1000px, 1000px); }
@@ -129,3 +113,4 @@ audio {
     font-size: 1rem;
   }
 }
+
