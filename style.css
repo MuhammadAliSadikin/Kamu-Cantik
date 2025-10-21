@@ -14,21 +14,7 @@ body {
   color: white;
   font-family: 'Poppins', sans-serif;
   position: relative;
-  background: radial-gradient(ellipse at bottom, #1b0034 0%, #090a0f 100%);
-}
-
-/* 🌌 Bintang bergerak halus */
-.star {
-  position: absolute;
-  background: white;
-  border-radius: 50%;
-  opacity: 0.8;
-  animation: twinkle 3s infinite ease-in-out;
-}
-
-@keyframes twinkle {
-  0%, 100% { opacity: 0.2; }
-  50% { opacity: 1; }
+  background: radial-gradient(circle at 20% 30%, #1b0036, #000010 80%);
 }
 
 /* 🌸 Bunga jatuh */
@@ -68,44 +54,47 @@ body {
   margin-bottom: 20px;
 }
 
-/* ✨ Lirik dengan efek cahaya putih */
-#lyrics {
-  font-size: 1.3rem;
-  color: #ffffff;
-  min-height: 150px;
-  white-space: pre-line;
-  text-shadow: 
-    0 0 10px rgba(255,255,255,0.8),
-    0 0 20px rgba(255,255,255,0.6),
-    0 0 30px rgba(255,255,255,0.4);
-  animation: glow 2s infinite alternate;
-  margin-bottom: 20px;
+/* 🎬 Video animasi */
+#animasiVideo {
+  display: block;
+  margin: 0 auto 25px auto;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+  width: 250px;
+  transition: transform 0.3s ease;
 }
 
-/* Animasi cahaya berdenyut */
-@keyframes glow {
-  from {
-    text-shadow:
-      0 0 5px rgba(255,255,255,0.6),
-      0 0 10px rgba(255,255,255,0.5),
-      0 0 20px rgba(255,255,255,0.3);
-  }
-  to {
-    text-shadow:
-      0 0 15px rgba(255,255,255,0.9),
-      0 0 30px rgba(255,255,255,0.8),
-      0 0 45px rgba(255,255,255,0.6);
-  }
+#animasiVideo:hover {
+  transform: scale(1.05);
+}
+
+/* ✨ Lirik dengan efek cahaya */
+#lyrics {
+  font-size: 1.2rem;
+  color: #e0e6ff;
+  min-height: 100px;
+  white-space: pre-line;
+  margin-bottom: 5px;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+               0 0 20px rgba(255, 255, 255, 0.6);
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0% { text-shadow: 0 0 5px white, 0 0 10px white; }
+  50% { text-shadow: 0 0 25px white, 0 0 50px white; }
+  100% { text-shadow: 0 0 5px white, 0 0 10px white; }
 }
 
 /* Tombol */
 #playBtn {
   background: linear-gradient(45deg, #7f00ff, #e100ff);
   border: none;
+  margin-top: -5px; 
   padding: 12px 35px;
   font-size: 1rem;
   border-radius: 50px;
-  color: white;
+  color: white; 
   cursor: pointer;
   transition: 0.3s;
   box-shadow: 0 0 20px rgba(225, 0, 255, 0.5);
@@ -122,10 +111,7 @@ audio {
 
 /* Responsif */
 @media (max-width: 600px) {
-  .title {
-    font-size: 1.5rem;
-  }
-  #lyrics {
-    font-size: 1rem;
-  }
+  .title { font-size: 1.5rem; }
+  #lyrics { font-size: 1rem; }
+  #animasiVideo { width: 200px; }
 }
