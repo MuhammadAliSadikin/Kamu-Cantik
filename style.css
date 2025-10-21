@@ -1,0 +1,131 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  background: radial-gradient(circle at 20% 30%, #1b0036, #000010 80%);
+}
+
+/* ✨ Latar galaksi tetap (tanpa animasi warna berganti) */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, #000010, #230046, #44007e, #000010);
+  background-size: 400% 400%;
+  z-index: -3;
+}
+
+/* 🌌 Lapisan bintang */
+body::after {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background-image: radial-gradient(white 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity: 0.4;
+  animation: starsMove 120s linear infinite;
+  z-index: -2;
+}
+
+@keyframes starsMove {
+  from { transform: translate(0, 0); }
+  to { transform: translate(1000px, 1000px); }
+}
+
+/* 🌸 Bunga jatuh */
+.flower {
+  position: absolute;
+  top: -10px;
+  color: #ffb6c1;
+  font-size: 1.2rem;
+  animation: fall linear infinite;
+  opacity: 0.9;
+  z-index: 3;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+/* 🌠 Kontainer utama */
+#container {
+  text-align: center;
+  background: rgba(40, 0, 80, 0.45);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  border-radius: 20px;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 0 40px rgba(180, 120, 255, 0.4);
+  z-index: 5;
+}
+
+/* Judul */
+.title {
+  font-size: 2rem;
+  color: #fff;
+  text-shadow: 0 0 10px #a6c1ee, 0 0 25px #7ab3ff;
+  margin-bottom: 20px;
+}
+
+/* Lirik */
+#lyrics {
+  font-size: 1.2rem;
+  color: #e0e6ff;
+  min-height: 150px;
+  white-space: pre-line;
+  text-shadow: 0 0 10px rgba(173, 216, 230, 0.6);
+  margin-bottom: 20px;
+}
+
+/* Tombol */
+#playBtn {
+  background: linear-gradient(45deg, #7f00ff, #e100ff);
+  border: none;
+  padding: 12px 35px;
+  font-size: 1rem;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 20px rgba(225, 0, 255, 0.5);
+}
+
+#playBtn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 25px rgba(225, 0, 255, 0.8);
+}
+
+audio {
+  display: none;
+}
+
+/* Responsif */
+@media (max-width: 600px) {
+  .title {
+    font-size: 1.5rem;
+  }
+  #lyrics {
+    font-size: 1rem;
+  }
+}
