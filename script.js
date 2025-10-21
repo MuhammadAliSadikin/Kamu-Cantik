@@ -26,7 +26,6 @@ function typeWriter(text, callback) {
   let i = 0;
   interval = setInterval(() => {
     if (paused) return; 
-
     lyricsContainer.textContent += text.charAt(i);
     i++;
     if (i >= text.length) {
