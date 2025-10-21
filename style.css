@@ -14,31 +14,27 @@ body {
   color: white;
   font-family: 'Poppins', sans-serif;
   position: relative;
-  background: radial-gradient(circle at 20% 30%, #1b0036, #000010 80%);
+  background: radial-gradient(ellipse at bottom, #1b0034 0%, #090a0f 100%);
 }
 
-/* ✨ Latar galaksi tetap (tanpa animasi warna berganti) */
-body::before {
-  content: "";
+/* 🌌 Bintang bergerak halus */
+.star {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, #000010, #230046, #44007e, #000010);
-  background-size: 400% 400%;
-  z-index: -3;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 3s infinite ease-in-out;
 }
-@keyframes starsMove {
-  from { transform: translate(0, 0); }
-  to { transform: translate(1000px, 1000px); }
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
 }
 
 /* 🌸 Bunga jatuh */
 .flower {
   position: absolute;
   top: -10px;
-  color: #ffb6c1;
   font-size: 1.2rem;
   animation: fall linear infinite;
   opacity: 0.9;
@@ -72,14 +68,34 @@ body::before {
   margin-bottom: 20px;
 }
 
-/* Lirik */
+/* ✨ Lirik dengan efek cahaya putih */
 #lyrics {
-  font-size: 1.2rem;
-  color: #e0e6ff;
+  font-size: 1.3rem;
+  color: #ffffff;
   min-height: 150px;
   white-space: pre-line;
-  text-shadow: 0 0 10px rgba(173, 216, 230, 0.6);
+  text-shadow: 
+    0 0 10px rgba(255,255,255,0.8),
+    0 0 20px rgba(255,255,255,0.6),
+    0 0 30px rgba(255,255,255,0.4);
+  animation: glow 2s infinite alternate;
   margin-bottom: 20px;
+}
+
+/* Animasi cahaya berdenyut */
+@keyframes glow {
+  from {
+    text-shadow:
+      0 0 5px rgba(255,255,255,0.6),
+      0 0 10px rgba(255,255,255,0.5),
+      0 0 20px rgba(255,255,255,0.3);
+  }
+  to {
+    text-shadow:
+      0 0 15px rgba(255,255,255,0.9),
+      0 0 30px rgba(255,255,255,0.8),
+      0 0 45px rgba(255,255,255,0.6);
+  }
 }
 
 /* Tombol */
@@ -113,4 +129,3 @@ audio {
     font-size: 1rem;
   }
 }
-
